@@ -1,0 +1,3 @@
+blessed==1.19.1
+colored==1.4.3
+getch==1.0
