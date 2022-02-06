@@ -208,14 +208,25 @@ def main():
     midnight = (datetime.datetime.now() + datetime.timedelta(days=1)).replace(hour=0, minute=0, microsecond=0, second=0)
     w.updateError("Next WORDLE in: "+str(datetime.timedelta(seconds=(midnight-datetime.datetime.now()).seconds)))	
     time.sleep(2)
+    return w
 
 
 
 
-
+import sys
 try:
-    main()
+    w=main()
 except KeyboardInterrupt:
     pass
 finally:
-    print("\033c"+reset+"Goodbye!\x1b[?25h")
+    print("\033cGoodbye!"+reset,end='')
+    cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
+    if(cliflag != "--nounicode"):
+        print("\n\nWordle "+str(w.turn)+"/6")
+        blocks=["⬛","🟨","🟩"]
+        for guess in w.guesses:
+            if guess[0][0]:
+                for letter in guess[0]:
+                    put(blocks[letter-1])
+                print()
+    print("\x1b[?25h")
