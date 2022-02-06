@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from colored import bg, fg, attr
 import datetime
 import time
