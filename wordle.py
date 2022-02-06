@@ -18,7 +18,7 @@ class Wordle:
             turn=self.turn
             self.guesses[turn][0]=[4,4,4,4,4]
             self.drawGuessLine(turn)
-            time.sleep(0.05)
+            time.sleep(0.01)
             self.guesses[turn][1] = word
             processed=[]
             for i,letter in enumerate(word):
@@ -128,10 +128,14 @@ def putCursorInside(guess,letter):
     col = 48 + letter * 6;
     placeCursor(col,row);
     put(colors[0])
-
+def blankScreen():
+    placeCursor(0,0)
+    put(reset+((" "*80+"\n")*24));
+    placeCursor(0,0)
 def main():
     cursorLocation = 0
-    print(reset+"\033c")
+    print("\033c")
+    blankScreen()
     screen="\x1b[?25l"+fg('green')+'''
    ████████████████████████████████████████
    █▄─█▀▀▀█─▄█─▄▄─█▄─▄▄▀█▄─▄▄▀█▄─▄███▄─▄▄─█
@@ -234,3 +238,4 @@ finally:
                     put(blocks[letter-1])
                 print()
     print("\x1b[?25h")
+
