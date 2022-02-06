@@ -215,14 +215,16 @@ def main():
 
 
 import sys
+w=None
 try:
     w=main()
+
 except KeyboardInterrupt:
     pass
 finally:
     print("\033cGoodbye!"+reset,end='')
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
-    if(cliflag != "--no-unicode"):
+    if(w and cliflag != "--nounicode"):
         print("\n\nWordle "+str(w.turn)+"/6")
         blocks=["⬛","🟨","🟩"]
         for guess in w.guesses:
