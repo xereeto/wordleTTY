@@ -222,7 +222,7 @@ except KeyboardInterrupt:
 finally:
     print("\033cGoodbye!"+reset,end='')
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
-    if(cliflag != "--nounicode"):
+    if(cliflag != "--no-unicode"):
         print("\n\nWordle "+str(w.turn)+"/6")
         blocks=["⬛","🟨","🟩"]
         for guess in w.guesses:
