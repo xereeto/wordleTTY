@@ -2,7 +2,7 @@
 
 A text-based client for the popular Wordle game. 
 
-usage: `python3 wordle.py`  
+usage: `python3 wordle.py [--nounicode]`  
 
 alternatively, you can play it remotely:  
 `telnet ssh.xereeto.co.uk 7777 `  
