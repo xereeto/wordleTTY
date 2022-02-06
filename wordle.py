@@ -61,7 +61,11 @@ class Wordle:
         placeCursor(9,21)
         put(reset+str(self.number))
         placeCursor(34,21)
-        put("Turn: "+str(min(self.turn+1,6))+"/6"+colors[0])
+        if(self.wonGame()):
+            t=self.turn
+        else:
+            t=self.turn+1
+        put("Turn: "+str(min(t,6))+"/6"+colors[0])
 
     def drawKeyboard(self):
         placeCursor(13,17)
