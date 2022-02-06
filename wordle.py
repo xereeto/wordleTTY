@@ -4,6 +4,11 @@ import datetime
 import time
 from getch import getch
 import possible
+import os
+
+unicode=True
+if not 'xterm' in os.environ['TERM']:
+    unicode=False
 
 colors = [bg("white")+fg("black"), bg("dark_gray")+fg("white"),bg("light_yellow")+fg("dark_gray"),bg("green")+fg("white"),bg("light_gray")]
 keycolors = [fg("white")+bg("black"), fg("dark_gray")+bg("black"),fg("light_yellow")+bg("black"),fg("green")+bg("black")]
@@ -140,13 +145,21 @@ def main():
     cursorLocation = 0
     print("\033c")
     blankScreen()
-    screen="\x1b[?25l"+fg('green')+'''
+    if not unicode: 
+    	  screen="\x1b[?25l"+fg('green')+'''                             _ _         
+      __      _____  _ __ __| | | ___    
+      \ \ /\ / / _ \| '__/ _` | |/ _ \   
+       \ V  V / (_) | | | (_| | |  __/   
+        \_/\_/ \___/|_|  \__,_|_|\___|   '''
+    else:
+        screen="\x1b[?25l"+fg('green')+'''
    ████████████████████████████████████████
    █▄─█▀▀▀█─▄█─▄▄─█▄─▄▄▀█▄─▄▄▀█▄─▄███▄─▄▄─█
    ██─█─█─█─██─██─██─▄─▄██─██─██─██▀██─▄█▀█
-   ▀▀▄▄▄▀▄▄▄▀▀▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀
-                           clone by xereeto
-                    original by josh wardle'''+fg('white')+'''
+   ▀▀▄▄▄▀▄▄▄▀▀▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀'''
+    screen +='''
+               clone by xereeto
+           original by josh wardle       '''+fg('white')+'''
    ----------------------------------------
    Guess the WORDLE in 6 tries.
    Each guess must be a valid 5 letter word.
@@ -163,6 +176,7 @@ def main():
    ----------------------------------------
    Game: XXX
                                                                            '''
+    
     goHome()
     print(screen,end="")
     goHome()
@@ -233,7 +247,7 @@ except KeyboardInterrupt:
 finally:
     print("\033cGoodbye!"+reset,end='')
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
-    if(w and cliflag != "--no-unicode"):
+    if(w and cliflag != "--no-unicode" and unicode):
         print("\n\nWordle "+str(w.turn)+"/6")
         blocks=["⬛","🟨","🟩"]
         for guess in w.guesses:
@@ -242,4 +256,3 @@ finally:
                     put(blocks[letter-1])
                 print()
     print("\x1b[?25h")
-
