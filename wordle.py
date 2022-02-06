@@ -45,7 +45,7 @@ class Wordle:
     def wonGame(self):
         return self.curGuess == self.answer
     def placeCursor(self):
-        putCursorInside(self.turn,min(len(self.curGuess),4))
+        putCursorInside(min(self.turn,5),min(len(self.curGuess),4))
     def drawGuessLine(self,i):
         baseRow = i * 4;
         baseCol = 46
@@ -207,6 +207,7 @@ def main():
         w.updateError("You lost :( The word was "+w.answer+"!")
     time.sleep(2)
     midnight = (datetime.datetime.now() + datetime.timedelta(days=1)).replace(hour=0, minute=0, microsecond=0, second=0)
+    w.updateError()
     w.updateError("Next WORDLE in: "+str(datetime.timedelta(seconds=(midnight-datetime.datetime.now()).seconds)))	
     time.sleep(2)
     return w
@@ -224,7 +225,7 @@ except KeyboardInterrupt:
 finally:
     print("\033cGoodbye!"+reset,end='')
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
-    if(w and cliflag != "--nounicode"):
+    if(w and cliflag != "--no-unicode"):
         print("\n\nWordle "+str(w.turn)+"/6")
         blocks=["⬛","🟨","🟩"]
         for guess in w.guesses:
