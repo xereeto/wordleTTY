@@ -1,6 +1,6 @@
 # wordTTY
 
-A text-based client for the popular Wordle game. 
+A text-based client for the popular Wordle game, to play on the command line. Real programmers don't need browsers! 
 
 usage: `python3 wordle.py [--no-unicode]`  
 
