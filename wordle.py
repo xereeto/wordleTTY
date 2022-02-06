@@ -232,6 +232,8 @@ def main():
     w.updateError()
     w.updateError("Next WORDLE in: "+str(datetime.timedelta(seconds=(midnight-datetime.datetime.now()).seconds)))	
     time.sleep(2)
+    w.updateError("Press any key to exit...")
+    x=getch()
     return w
 
 
@@ -256,4 +258,3 @@ finally:
                     put(blocks[letter-1])
                 print()
     print("\x1b[?25h")
-
