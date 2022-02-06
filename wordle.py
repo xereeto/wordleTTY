@@ -201,7 +201,7 @@ def main():
                     w.curGuess+=char
                     w.updateError()
                 w.placeCursor()
-            if ord(char)==127: # backspace
+            if ord(char)==127 or ord(char)==8: # backspace
                 if len(w.curGuess)>0:
                     if len(w.curGuess)==5:
                         put(" ")
@@ -256,3 +256,4 @@ finally:
                     put(blocks[letter-1])
                 print()
     print("\x1b[?25h")
+
