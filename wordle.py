@@ -6,11 +6,12 @@ from getch import getch
 import possible
 import os
 
-unicode=True
-if not 'xterm' in os.environ['TERM']:
-    unicode=False
+unicode=False
+if 'TERM' in os.environ:
+    if 'xterm' in os.environ['TERM']:
+        unicode=True
 
-colors = [bg("white")+fg("black"), bg("dark_gray")+fg("white"),bg("light_yellow")+fg("dark_gray"),bg("green")+fg("white"),bg("light_gray")]
+colors =[ bg("white")+fg("black"), bg("dark_gray")+fg("white"),bg("light_yellow")+fg("dark_gray"),bg("green")+fg("white"),bg("light_gray")]
 keycolors = [fg("white")+bg("black"), fg("dark_gray")+bg("black"),fg("light_yellow")+bg("black"),fg("green")+bg("black")]
 reset = bg("black")+fg("white")
 
@@ -138,21 +139,21 @@ def putCursorInside(guess,letter):
     placeCursor(col,row);
     put(colors[0])
 def blankScreen():
+    put(reset+'\033[2J')
     placeCursor(0,0)
     put(reset+((" "*80+"\n")*24));
     placeCursor(0,0)
 def main():
     cursorLocation = 0
-    print("\033c")
     blankScreen()
     if not unicode: 
-    	  screen="\x1b[?25l"+fg('green')+'''                             _ _         
+    	  screen=fg('green')+'''                             _ _         
       __      _____  _ __ __| | | ___    
       \ \ /\ / / _ \| '__/ _` | |/ _ \   
        \ V  V / (_) | | | (_| | |  __/   
         \_/\_/ \___/|_|  \__,_|_|\___|   '''
     else:
-        screen="\x1b[?25l"+fg('green')+'''
+        screen=fg('green')+'''
    ████████████████████████████████████████
    █▄─█▀▀▀█─▄█─▄▄─█▄─▄▄▀█▄─▄▄▀█▄─▄███▄─▄▄─█
    ██─█─█─█─██─██─██─▄─▄██─██─██─██▀██─▄█▀█
@@ -174,11 +175,11 @@ def main():
               a s d f g h j k l
                 z x c v b n m
    ----------------------------------------
-   Game: XXX
+   Game:    
                                                                            '''
-    
+    put(screen)
     goHome()
-    print(screen,end="")
+    #print(screen,end="")
     goHome()
     w = Wordle()
     while w.turn<6 and not w.wonGame():
@@ -247,7 +248,9 @@ try:
 except KeyboardInterrupt:
     pass
 finally:
-    print("\033cGoodbye!"+reset,end='')
+    blankScreen()
+    print("Goodbye!")
+    #put("Goodbye!")
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
     if(w and cliflag != "--no-unicode" and unicode):
         print("\n\nWordle "+str(w.turn)+"/6")
@@ -257,4 +260,4 @@ finally:
                 for letter in guess[0]:
                     put(blocks[letter-1])
                 print()
-    print("\x1b[?25h")
+
