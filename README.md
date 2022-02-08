@@ -2,7 +2,7 @@
 
 A text-based client for the popular Wordle game, to play on the command line. Real programmers don't need browsers! 
 
-usage: `python3 wordle.py [--no-unicode]`  
+usage: `./wordle.py`  
 
 alternatively, you can play it remotely:  
 `telnet wordle.xereeto.co.uk 7777 `  
