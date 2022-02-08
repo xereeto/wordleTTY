@@ -2,7 +2,7 @@
 
 A text-based client for the popular Wordle game, to play on the command line. Real programmers don't need browsers! 
 
-play remotely:
+play remotely:  
 `telnet wordle.xereeto.co.uk 7777 `  
 or  
 `ssh play@wordle.xereeto.co.uk -p 9999`
