@@ -1,4 +1,4 @@
-# wordTTY
+# wordleTTY
 
 A text-based client for the popular Wordle game, to play in your terminal. Real programmers don't need browsers!  
 Compatible with ANSI and VT220-style terminals. Has built-in monochrome fallback mode. 
