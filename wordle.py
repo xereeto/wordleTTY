@@ -6,6 +6,7 @@ import time
 from getch import getch
 import possible
 import os
+import random
 
 term = blessed.Terminal()
 
@@ -123,7 +124,10 @@ class Wordle:
         self.number = number
         self.turn = 0
         self.curGuess=""
-        self.answer = possible.answers[number].upper()
+        if 'random' in os.environ:
+            self.answer = random.choice(possible.answers).upper()    
+        else:
+            self.answer = possible.answers[number].upper()
         self.guessedKeys = {}
         # 0 = no guess, 1 = not in word, 2 = wrong place, 3 = correct
         self.guesses = [[[0 for i in range(5)],"     "] for i in range(6)]
@@ -261,8 +265,9 @@ def main():
     time.sleep(2)
     midnight = (datetime.datetime.now() + datetime.timedelta(days=1)).replace(hour=0, minute=0, microsecond=0, second=0)
     w.updateError()
-    w.updateError("Next WORDLE in: "+str(datetime.timedelta(seconds=(midnight-datetime.datetime.now()).seconds)))	
-    time.sleep(2)
+    if not 'random' in os.environ:
+        w.updateError("Next WORDLE in: "+str(datetime.timedelta(seconds=(midnight-datetime.datetime.now()).seconds)))	
+        time.sleep(2)
     w.updateError("Press any key to exit...")
     x=getch()
     return w
@@ -280,16 +285,17 @@ except KeyboardInterrupt:
     pass
 finally:
     with term.fullscreen():
-        put(term.clear)
+        put(reset+term.clear)
     print(reset+"Goodbye!")
     #put("Goodbye!")
     cliflag = sys.argv[1] if len(sys.argv) > 1 else ''
     if(w and cliflag != "--no-unicode" and unicode):
-        print("\n\nWordle "+str(w.turn)+"/6")
+        print("\n\nWordle "+("RANDOM" if 'random' in os.environ else str(w.number))+" "+(str(w.turn) if w.wonGame() else "X")+"/6\n")
         blocks=["⬛","🟨","🟩"]
         for guess in w.guesses:
             if guess[0][0]:
                 for letter in guess[0]:
                     put(blocks[letter-1])
                 print()
+    print("\n"+term.underline("play in terminal")+"\ntoday's WORDLE: $ ssh play@wordle.xereeto.co.uk -p 9999\nrandom WORDLE: $ ssh play-random@wordle.xereeto.co.uk -p 9999")
 
