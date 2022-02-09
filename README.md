@@ -5,10 +5,12 @@ Compatible with ANSI and VT220-style terminals. Has built-in monochrome fallback
 
 play remotely:  
 `telnet wordle.xereeto.co.uk 7777 `  
+`telnet wordle.xereeto.co.uk 7777 -l random`, for a random puzzle    
 or  
 `ssh play@wordle.xereeto.co.uk -p 9999`  
-or  
 `ssh play-random@wordle.xereeto.co.uk -p 9999`, for a random puzzle
+
+don't try to log in as root over telnet
 
 dial-up version coming soom (yes, really)
 ![image](https://user-images.githubusercontent.com/4806744/152666421-ca5dd7a1-6da2-475d-9aa1-377486a37ed6.png)
