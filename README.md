@@ -7,7 +7,7 @@ play remotely:
 `telnet wordle.xereeto.co.uk 7777 `  
 or  
 `ssh play@wordle.xereeto.co.uk -p 9999`
-or
+or  
 `ssh play-random@wordle.xereeto.co.uk -p 9999`, for a random puzzle
 
 dial-up version coming soom (yes, really)
