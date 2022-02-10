@@ -7,6 +7,7 @@ from getch import getch
 import possible
 import os
 import random
+import warnings
 
 with warnings.catch_warnings():
     warnings.simplefilter("ignore")
