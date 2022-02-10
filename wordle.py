@@ -8,7 +8,9 @@ import possible
 import os
 import random
 
-term = blessed.Terminal()
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore")
+    term = blessed.Terminal()
 
 unicode=False
 eightColor=True
