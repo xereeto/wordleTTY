@@ -16,5 +16,5 @@ or
 
 don't try to log in as root over telnet
 
-dial-up version coming soom (yes, really)
+dial-up version coming soon (yes, really)
 ![image](https://user-images.githubusercontent.com/4806744/152666421-ca5dd7a1-6da2-475d-9aa1-377486a37ed6.png)
